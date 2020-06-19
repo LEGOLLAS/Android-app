@@ -2,13 +2,10 @@ package com.example.testwebview;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
-import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.webkit.WebView;
 import android.widget.TextView;
 import static android.Manifest.permission.READ_PHONE_STATE;
@@ -28,8 +25,19 @@ public class MainActivity extends AppCompatActivity {
 
         if (ActivityCompat.checkSelfPermission(this, READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{READ_PHONE_STATE}, PERMISSION_REQUEST_CODE);
-
+        }else{
+            WebView webview = new WebView(this);
+            String PhoneNum = "0000000000";
+            PhoneNum = telephonyManager.getLine1Number();
+            setContentView(webview);
+            if (PhoneNum.startsWith("+82")) {
+                PhoneNum = PhoneNum.replace("+82", "0");
+            }
+            String url = "http://192.168.0.54/test.php";
+            String postData = "userNumber=" + PhoneNum;
+            webview.postUrl(url,postData.getBytes());
         }
+
 
     }
 
@@ -51,8 +59,10 @@ public class MainActivity extends AppCompatActivity {
                 String url = "http://192.168.0.54/test.php";
                 String postData = "userNumber=" + PhoneNum;
                 webview.postUrl(url,postData.getBytes());
-                Log.v("333", PhoneNum);
             }
         }
+    }
+    public void Webview(){
+
     }
 }
