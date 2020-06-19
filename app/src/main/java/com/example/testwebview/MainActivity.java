@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
             String postData = "userNumber=" + PhoneNum;
             webview.postUrl(url,postData.getBytes());
         }
-
-
     }
 
     @Override
