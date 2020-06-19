@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 100;
     TextView textView;
     TelephonyManager telephonyManager;
+    String url = "";
+    String postData = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +53,17 @@ public class MainActivity extends AppCompatActivity {
                 String PhoneNum = "0000000000";
                 PhoneNum = telephonyManager.getLine1Number();
                 setContentView(webview);
-                if (PhoneNum.startsWith("+82")) {
-                    PhoneNum = PhoneNum.replace("+82", "0");
-                }
-                String url = "http://192.168.0.54/test.php";
-                String postData = "userNumber=" + PhoneNum;
+                getData(PhoneNum);
                 webview.postUrl(url,postData.getBytes());
             }
         }
     }
-    public void Webview(){
+    public void getData(String number){
+        if (number.startsWith("+82")) {
+            number = number.replace("+82", "0");
+        }
+        String url = "http://192.168.0.54/test.php";
+        String postData = "userNumber=" + number;
 
     }
 }
