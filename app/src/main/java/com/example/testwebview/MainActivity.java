@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.webkit.WebView;
 import android.widget.TextView;
 import static android.Manifest.permission.READ_PHONE_STATE;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        MainActivity changeData = new MainActivity();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -32,12 +34,13 @@ public class MainActivity extends AppCompatActivity {
             String PhoneNum = "0000000000";
             PhoneNum = telephonyManager.getLine1Number();
             setContentView(webview);
+//            this.getData(PhoneNum);
             if (PhoneNum.startsWith("+82")) {
                 PhoneNum = PhoneNum.replace("+82", "0");
             }
             String url = "http://192.168.0.54/test.php";
             String postData = "userNumber=" + PhoneNum;
-            webview.postUrl(url,postData.getBytes());
+            this.getData(url, postData);
         }
     }
 
@@ -53,17 +56,19 @@ public class MainActivity extends AppCompatActivity {
                 String PhoneNum = "0000000000";
                 PhoneNum = telephonyManager.getLine1Number();
                 setContentView(webview);
-                getData(PhoneNum);
-                webview.postUrl(url,postData.getBytes());
+                if (PhoneNum.startsWith("+82")) {
+                    PhoneNum = PhoneNum.replace("+82", "0");
+                }
+                String url = "http://192.168.0.54/test.php";
+                String postData = "userNumber=" + PhoneNum;
+                webview.postUrl(url, postData.getBytes());
             }
         }
     }
-    public void getData(String number){
-        if (number.startsWith("+82")) {
-            number = number.replace("+82", "0");
-        }
-        String url = "http://192.168.0.54/test.php";
-        String postData = "userNumber=" + number;
+    public void getData(String url, String postData){
+        WebView webview = new WebView(this);
+        System.out.print("sssssss");
+        webview.postUrl(url, postData.getBytes());
 
     }
 }
