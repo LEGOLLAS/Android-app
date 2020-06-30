@@ -33,14 +33,7 @@ public class MainActivity extends AppCompatActivity {
             WebView webview = new WebView(this);
             String PhoneNum = "0000000000";
             PhoneNum = telephonyManager.getLine1Number();
-            setContentView(webview);
-//            this.getData(PhoneNum);
-            if (PhoneNum.startsWith("+82")) {
-                PhoneNum = PhoneNum.replace("+82", "0");
-            }
-            String url = "http://192.168.0.54/test.php";
-            String postData = "userNumber=" + PhoneNum;
-            this.getData(url, postData);
+            getData(PhoneNum);
         }
     }
 
@@ -55,20 +48,19 @@ public class MainActivity extends AppCompatActivity {
                 WebView webview = new WebView(this);
                 String PhoneNum = "0000000000";
                 PhoneNum = telephonyManager.getLine1Number();
-                setContentView(webview);
-                if (PhoneNum.startsWith("+82")) {
-                    PhoneNum = PhoneNum.replace("+82", "0");
-                }
-                String url = "http://192.168.0.54/test.php";
-                String postData = "userNumber=" + PhoneNum;
-                webview.postUrl(url, postData.getBytes());
+                getData(PhoneNum);
             }
         }
     }
-    public void getData(String url, String postData){
+    public void getData(String PhoneNum){
         WebView webview = new WebView(this);
-        System.out.print("sssssss");
+        setContentView(webview);
+        if (PhoneNum.startsWith("+82")) {
+            PhoneNum = PhoneNum.replace("+82", "0");
+        }
+        System.out.print(PhoneNum);
+        String url = "http://192.168.0.54/test.php";
+        String postData = "userNumber=" + PhoneNum;
         webview.postUrl(url, postData.getBytes());
-
     }
 }
