@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 public class GeoLocationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        MainActivity changeData = new MainActivity();
+        GeoLocationActivity changeData = new GeoLocationActivity();
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.gps);
 
     }
 }
