@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.webkit.WebView;
 import android.widget.TextView;
 import static android.Manifest.permission.READ_PHONE_STATE;
@@ -15,8 +14,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 100;
     TextView textView;
     TelephonyManager telephonyManager;
-    String url = "";
-    String postData = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +27,9 @@ public class MainActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{READ_PHONE_STATE}, PERMISSION_REQUEST_CODE);
         }else{
-            WebView webview = new WebView(this);
             String PhoneNum = "0000000000";
             PhoneNum = telephonyManager.getLine1Number();
-            getData(PhoneNum);
+            getWebViewPostData(PhoneNum);
         }
     }
 
@@ -45,14 +41,13 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             else{
-                WebView webview = new WebView(this);
                 String PhoneNum = "0000000000";
                 PhoneNum = telephonyManager.getLine1Number();
-                getData(PhoneNum);
+                getWebViewPostData(PhoneNum);
             }
         }
     }
-    public void getData(String PhoneNum){
+    public void getWebViewPostData(String PhoneNum){
         WebView webview = new WebView(this);
         setContentView(webview);
         if (PhoneNum.startsWith("+82")) {
