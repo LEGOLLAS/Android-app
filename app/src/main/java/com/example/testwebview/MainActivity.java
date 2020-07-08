@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         if (PhoneNum.startsWith("+82")) {
             PhoneNum = PhoneNum.replace("+82", "0");
         }
-        System.out.print(PhoneNum);
         String url = "http://192.168.0.54/test.php";
         String postData = "userNumber=" + PhoneNum;
         webview.postUrl(url, postData.getBytes());
