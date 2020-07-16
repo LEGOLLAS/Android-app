@@ -34,19 +34,18 @@ public class GeoLocation extends AppCompatActivity{
         Button ShowLocationButton = (Button) findViewById(R.id.button);
         ShowLocationButton.setOnClickListener(new View.OnClickListener()
         {
-            @Override
-            public void onClick(View arg0)
-            {
-                gpsTracker = new GpsTracker(MainActivity.this);
-                double latitude = gpsTracker.getLatitude();
-                double longitude = gpsTracker.getLongitude();
+            gpsTracker = new GpsTracker(MainActivity.this);
+            double latitude = gpsTracker.getLatitude();
+            double longitude = gpsTracker.getLongitude();
 
-                String address = getCurrentAddress(latitude, longitude);
-                textview_address.setText(address);
+            String address = getCurrentAddress(latitude, longitude);
+            textview_address.setText(address);
 
-                Toast.makeText(MainActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
-            }
+            Toast.makeText(MainActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
         });
+    }
+
+    private boolean checkLocationServicesStatus() {
     }
 
     public void showDialogForLocationServiceSetting() {
