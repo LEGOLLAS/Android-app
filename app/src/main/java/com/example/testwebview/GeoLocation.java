@@ -45,9 +45,6 @@ public class GeoLocation extends AppCompatActivity{
         });
     }
 
-    private boolean checkLocationServicesStatus() {
-    }
-
     public void showDialogForLocationServiceSetting() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("위치 서비스 비활성화");
@@ -69,18 +66,14 @@ public class GeoLocation extends AppCompatActivity{
             }
         });
         builder.create().show();
-
-
     }
 
     @Override
     public boolean checkRunTimePermission() {
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
-        int hasFineLocationPermission = ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.ACCESS_COARSE_LOCATION);
+        int hasFineLocationPermission = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
 
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
